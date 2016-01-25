@@ -1,0 +1,20 @@
+package $(PackageName)$(CSLB){
+	import starling.display.Sprite;
+	
+	/**
+	$(CBI)* ...
+	$(CBI)* @author $(DefaultUser)
+	$(CBI)*/
+	public class AppRoot extends Sprite $(CSLB){
+		
+		public function AppRoot() $(CSLB){
+			super();
+		}
+		
+		public function init():void $(CSLB){
+			// Start this your application
+		}
+		
+	}
+	
+}

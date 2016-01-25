@@ -1,0 +1,10 @@
+An AIR mobile app written in ActionScript 3 on Starling Framework
+
+Using libraries:
+	Starling 1.6 - from 16.04.2015 http://gamua.com/starling/download/
+	Feathers 2.1.1 - from 16.04.2015 http://feathersui.com/download/
+	TweenMax 12.1.5 - from 16.04.2015 http://greensock.com/gsap-as
+	StarlingFullScreenExtension - from 16.04.2015 https://github.com/Brinkbit/StarlingFullScreenExtension
+	Starling-Extension-Graphics - from 16.04.2015 https://github.com/StarlingGraphics/Starling-Extension-Graphics
+	SoundAS - from 16.04.2015 https://github.com/treefortress/SoundAS
+	Gestouch - from 16.04.2015 https://github.com/fljot/Gestouch

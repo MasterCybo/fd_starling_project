@@ -1,0 +1,91 @@
+package $(PackageName)$(CSLB){
+	import flash.desktop.NativeApplication;
+	import flash.events.Event;
+	import flash.display.Sprite;
+	import flash.display.StageAlign;
+	import flash.display.StageScaleMode;
+	import flash.display.Stage3D;
+	import flash.display3D.Context3DProfile;
+	import flash.geom.Rectangle;
+	import flash.system.Capabilities;
+	import flash.ui.Multitouch;
+	import flash.ui.MultitouchInputMode;
+	
+	import starling.core.Starling;
+	import starling.events.Event;
+	
+	/**
+	$(CBI)* ...
+	$(CBI)* @author $(DefaultUser)
+	$(CBI)*/
+	[SWF(width=480,height=845,frameRate=60)]
+	public class Main extends Sprite $(CSLB){
+		
+		public function Main() $(CSLB){
+			stage.scaleMode = StageScaleMode.NO_SCALE;
+			stage.align = StageAlign.TOP_LEFT;
+			stage.addEventListener(flash.events.Event.DEACTIVATE, deactivate);
+			
+			// touch or gesture?
+			Multitouch.inputMode = MultitouchInputMode.TOUCH_POINT;
+			
+			// entry point
+			
+			this.initStarling();
+		}
+		
+		private function initStarling():void 
+		{
+			Starling.multitouchEnabled = true; // useful on mobile devices
+			
+			var iOS:Boolean = Capabilities.manufacturer.toLowerCase().indexOf( "iOS" ) != -1;
+            Starling.handleLostContext = !iOS; // not necessary on iOS. Saves a lot of memory!
+			
+			var viewPort:Rectangle = new Rectangle( 0, 0, stage.stageWidth, stage.stageHeight );
+			var stage3D:Stage3D = null;
+			var renderMode:String = "auto"; // 
+			var profile:String = Context3DProfile.BASELINE;
+			
+			var starling:Starling = new Starling( AppRoot, stage, viewPort, stage3D, renderMode, profile );
+			starling.addEventListener( starling.events.Event.ROOT_CREATED, onRootCreated );
+			starling.addEventListener( starling.events.Event.FATAL_ERROR, onFatalError );
+			starling.addEventListener( starling.events.Event.CONTEXT3D_CREATE, onContextCreated );
+			starling.antiAliasing = 1;
+			starling.stage.color = 0x000000;
+			starling.showStatsAt( "right", "middle" );
+			starling.start();
+		}
+		
+		private function onRootCreated( ev:starling.events.Event, root:AppRoot ):void 
+		{
+			trace( "Root created" );
+			
+			trace( "=== Starling Info ================================" );
+			trace( "\tversion : " + Starling.VERSION );
+			trace( "\tprofile : " + Starling.current.profile );
+			trace( "\tviewPort : " + Starling.current.viewPort );
+			trace( "\tstage : " + Starling.current.stage.stageWidth + " x " + Starling.current.stage.stageHeight );
+			trace( "=== Starling Info ================================" );
+			
+			root.init();
+		}
+		
+		private function onFatalError( ev:starling.events.Event ):void 
+		{
+			trace( "Fatal error!" );
+		}
+		
+		private function onContextCreated( ev:starling.events.Event ):void 
+		{
+			trace( "Context3D created" );
+		}
+		
+		private function deactivate(ev:flash.events.Event):void 
+		{
+			// make sure the app behaves well (or exits) when in background
+			//NativeApplication.nativeApplication.exit();
+		}
+		
+	}
+	
+}
